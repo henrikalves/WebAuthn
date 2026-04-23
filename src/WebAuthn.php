@@ -676,7 +676,7 @@ class WebAuthn {
      */
     private function _verifySignature($dataToVerify, $signature, $credentialPublicKey) {
 
-        // Use Sodium to verify EdDSA 25519 as its not yet supported by openssl
+        // Use Sodium to verify EdDSA 25519 if it's not supported by openssl
         if (\function_exists('sodium_crypto_sign_verify_detached') && !defined('OPENSSL_KEYTYPE_ED25519')) {
             $pkParts = [];
             if (\preg_match('/BEGIN PUBLIC KEY\-+(?:\s|\n|\r)+([^\-]+)(?:\s|\n|\r)*\-+END PUBLIC KEY/i', $credentialPublicKey, $pkParts)) {
